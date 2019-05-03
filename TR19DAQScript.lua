@@ -3,14 +3,11 @@
 
 tog = 0
 res = 0
-setTickRate(5)
-initSer(6, 9600, 8, 0, 1)   -- Set up aux serial port for NEXTION display
-
-
+setTickRate(100)
+initSer(6, 115200, 8, 0, 1)   -- Set up aux serial port for NEXTION display
 setGpio(2, 0)
 
 function onTick()
-
     -- DAQ Switch
     local arm = getGpio(2)
     if arm == 0 then
@@ -23,31 +20,21 @@ function onTick()
 
     -- Oil pressure warning light
     if getAnalog(2) < 20 then
-        if tog == 0 then
+        if tog >= 40 then
+            tog = 0
+        end
+
+        if tog < 20 then
             setGpio(0, 1)
-            tog = 1
+            tog = tog + 1
         else
             setGpio(0, 0)
-            tog = 0
+            tog = tog + 1
         end
     else
         setGpio(0, 1)
     end
     -- END of oil pressure warning light
-
-    -- Testing for shift indicator
-    writeCSer(6, 0x6a) --j
-    writeCSer(6, 0x31) --1
-    writeCSer(6, 0x2e) --.
-    writeCSer(6, 0x76) --v
-    writeCSer(6, 0x61) --a
-    writeCSer(6, 0x6c) --l
-    writeCSer(6, 0x3d) --=
-    writeCSer(6, 0x38) --8
-    writeCSer(6, 0x30) --0
-    writeCSer(6, 0xff)
-    writeCSer(6, 0xff)
-    writeCSer(6, 0xff)
 
     -- Local var used for printing numbers
     local neg = 0
@@ -58,6 +45,30 @@ function onTick()
     local z2 = 0    -- 100
     local z3 = 0    -- 1000
     local z4 = 0    -- 10000
+
+    -- Print GPS spd
+    local spd = getGpsSpeed ()
+    spd = math.floor(spd)
+    z0 = math.floor(spd % 10)
+    spd = spd / 10
+    z1 = math.floor(spd % 10)
+    writeCSer(6, 0x74) --t
+    writeCSer(6, 0x31) --1
+    writeCSer(6, 0x2e) --.
+    writeCSer(6, 0x74) --t
+    writeCSer(6, 0x78) --x
+    writeCSer(6, 0x74) --t
+    writeCSer(6, 0x3d) --=
+    writeCSer(6, 0x22) --
+    if z1 ~= 0 then
+        writeCSer(6, (48+z1))
+    end
+    writeCSer(6, (48+z0))
+    writeCSer(6, 0x22) --"
+    writeCSer(6, 0xff)
+    writeCSer(6, 0xff)
+    writeCSer(6, 0xff)
+
 
     -- Print engine RPM
     local RPM = getTimerRpm (1)
@@ -183,26 +194,22 @@ function onTick()
     writeCSer(6, 0xff)
     writeCSer(6, 0xff)
 
-
     -- Print STANG
-    local stAng = getAnalog (3)
-    println(stAng)
+    local stAng = getAnalog (4)
+    stAng = stAng*20
     stAng = math.floor(stAng)
-    stAng = math.abs(stAng)
-    --println(stAng)
     z0 = math.floor(stAng % 10)
     stAng = stAng / 10
     z1 = math.floor(stAng % 10)
     stAng = stAng / 10
     z2 = math.floor(stAng % 10)
-    writeCSer(6, 0x74) --t
-    writeCSer(6, 0x30) --0
+    writeCSer(6, 0x6a) --j
+    writeCSer(6, 0x31) --1
     writeCSer(6, 0x2e) --.
-    writeCSer(6, 0x74) --t
-    writeCSer(6, 0x78) --x
-    writeCSer(6, 0x74) --t
+    writeCSer(6, 0x76) --v
+    writeCSer(6, 0x61) --a
+    writeCSer(6, 0x6c) --l
     writeCSer(6, 0x3d) --=
-    writeCSer(6, 0x22) --"
     if (z2 ~= 0) then
         writeCSer(6, (48+z2))
     end
@@ -210,7 +217,6 @@ function onTick()
         writeCSer(6, (48+z1))
     end
     writeCSer(6, (48+z0))
-    writeCSer(6, 0x22) --"
     writeCSer(6, 0xff)
     writeCSer(6, 0xff)
     writeCSer(6, 0xff)
