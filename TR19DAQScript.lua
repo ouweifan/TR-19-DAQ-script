@@ -3,8 +3,10 @@
 
 tog = 0
 res = 0
-setTickRate(1000)
+setTickRate(5)
 initSer(6, 9600, 8, 0, 1)   -- Set up aux serial port for NEXTION display
+
+
 setGpio(2, 0)
 
 function onTick()
@@ -81,7 +83,7 @@ function onTick()
     if (z4 ~= 0) then
         writeCSer(6, (48+z4))
     end
-    if (z4 ~= 0 and z3~= 0) then
+    if (z4 ~= 0 or z3~= 0) then
         writeCSer(6, (48+z3))
     end
     writeCSer(6, (48+z2))
@@ -111,7 +113,7 @@ function onTick()
     if (z2 ~= 0) then
         writeCSer(6, (48+z2))
     end
-    if (z2 ~= 0 and z1~= 0) then
+    if (z2 ~= 0 or z1~= 0) then
         writeCSer(6, (48+z1))
     end
     writeCSer(6, (48+z0))
@@ -131,7 +133,7 @@ function onTick()
     oPres = oPres / 10
     z1 = math.floor(oPres % 10)
     writeCSer(6, 0x74) --t
-    writeCSer(6, 0x33) --3
+    writeCSer(6, 0x36) --6
     writeCSer(6, 0x2e) --.
     writeCSer(6, 0x74) --t
     writeCSer(6, 0x78) --x
@@ -176,6 +178,38 @@ function onTick()
     writeCSer(6, 0x2e) --.
     writeCSer(6, (48+x1))
     writeCSer(6, (48+x2))
+    writeCSer(6, 0x22) --"
+    writeCSer(6, 0xff)
+    writeCSer(6, 0xff)
+    writeCSer(6, 0xff)
+
+
+    -- Print STANG
+    local stAng = getAnalog (3)
+    println(stAng)
+    stAng = math.floor(stAng)
+    stAng = math.abs(stAng)
+    --println(stAng)
+    z0 = math.floor(stAng % 10)
+    stAng = stAng / 10
+    z1 = math.floor(stAng % 10)
+    stAng = stAng / 10
+    z2 = math.floor(stAng % 10)
+    writeCSer(6, 0x74) --t
+    writeCSer(6, 0x30) --0
+    writeCSer(6, 0x2e) --.
+    writeCSer(6, 0x74) --t
+    writeCSer(6, 0x78) --x
+    writeCSer(6, 0x74) --t
+    writeCSer(6, 0x3d) --=
+    writeCSer(6, 0x22) --"
+    if (z2 ~= 0) then
+        writeCSer(6, (48+z2))
+    end
+    if (z2 ~= 0 or z1~= 0) then
+        writeCSer(6, (48+z1))
+    end
+    writeCSer(6, (48+z0))
     writeCSer(6, 0x22) --"
     writeCSer(6, 0xff)
     writeCSer(6, 0xff)
