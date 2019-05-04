@@ -134,15 +134,15 @@ function onTick()
     writeCSer(6, 0xff)
 
     -- Print oil pressure
-    local oPres = getAnalog (2)
-    oPres = math.floor(oPres * 100)
-    x2 = math.floor(oPres % 10)
-    oPres = oPres / 10
-    x1 = math.floor(oPres % 10)
-    oPres = oPres / 10
-    z0 = math.floor(oPres % 10)
-    oPres = oPres / 10
-    z1 = math.floor(oPres % 10)
+    local gear = getAnalog (2)
+    gear = math.floor(gear * 100)
+    x2 = math.floor(gear % 10)
+    gear = gear / 10
+    x1 = math.floor(gear % 10)
+    gear = gear / 10
+    z0 = math.floor(gear % 10)
+    gear = gear / 10
+    z1 = math.floor(gear % 10)
     writeCSer(6, 0x74) --t
     writeCSer(6, 0x36) --6
     writeCSer(6, 0x2e) --.
@@ -217,6 +217,31 @@ function onTick()
         writeCSer(6, (48+z1))
     end
     writeCSer(6, (48+z0))
+    writeCSer(6, 0xff)
+    writeCSer(6, 0xff)
+    writeCSer(6, 0xff)
+
+
+
+    -- Print gear
+    local gear = calcGear(40.64, 2.75, 2.846, 1.947, 1.556, 1.333, 1.190, 1.083)
+                            -- Wheel dia, final drive, 1st, 2nd.....
+    z0 = math.floor(gear % 10)
+    writeCSer(6, 0x74) --t
+    writeCSer(6, 0x37) --7
+    writeCSer(6, 0x2e) --.
+    writeCSer(6, 0x74) --t
+    writeCSer(6, 0x78) --x
+    writeCSer(6, 0x74) --t
+    writeCSer(6, 0x3d) --=
+    writeCSer(6, 0x22) --"
+    if gear == nil then
+        writeCSer(6, 0x4e)  -- N
+    else
+        writeCSer(6, (48+gear)) -- gear num
+    end
+    writeCSer(6, (48+z0))
+    writeCSer(6, 0x22) --"
     writeCSer(6, 0xff)
     writeCSer(6, 0xff)
     writeCSer(6, 0xff)
