@@ -238,9 +238,8 @@ function onTick()
     if gear == nil then
         writeCSer(6, 0x4e)  -- N
     else
-        writeCSer(6, (48+gear)) -- gear num
+        writeCSer(6, (48+z0)) -- gear num
     end
-    writeCSer(6, (48+z0))
     writeCSer(6, 0x22) --"
     writeCSer(6, 0xff)
     writeCSer(6, 0xff)
