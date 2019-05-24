@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/TR19DAQScript.lua" description="Oil Pressure warning light" line="21" />
-    <bookmark url="file://$PROJECT_DIR$/TR19DAQScript.lua" description="DAQ Switch" line="11" />
-    <bookmark url="file://$PROJECT_DIR$/TR19DAQScript.lua" description="Test shift indicator" line="35" />
-    <bookmark url="file://$PROJECT_DIR$/TR19DAQScript.lua" description="Local Var" line="49" />
-    <bookmark url="file://$PROJECT_DIR$/TR19DAQScript.lua" description="Print RPM" line="59" />
-    <bookmark url="file://$PROJECT_DIR$/TR19DAQScript.lua" description="Print coolant temp" line="94" />
-    <bookmark url="file://$PROJECT_DIR$/TR19DAQScript.lua" description="Print oil pres" line="122" />
-    <bookmark url="file://$PROJECT_DIR$/TR19DAQScript.lua" description="Print volt" line="153" />
+    <bookmark url="file://$PROJECT_DIR$/TR19DAQScript.lua" description="Print oil pres" line="135" />
+    <bookmark url="file://$PROJECT_DIR$/TR19DAQScript.lua" description="Print RPM" line="72" />
+    <bookmark url="file://$PROJECT_DIR$/TR19DAQScript.lua" description="Print coolant temp" line="107" />
+    <bookmark url="file://$PROJECT_DIR$/TR19DAQScript.lua" description="DAQ Switch" line="10" />
+    <bookmark url="file://$PROJECT_DIR$/TR19DAQScript.lua" description="Oil Pressure warning light" line="20" />
+    <bookmark url="file://$PROJECT_DIR$/TR19DAQScript.lua" description="Local Var" line="38" />
+    <bookmark url="file://$PROJECT_DIR$/TR19DAQScript.lua" description="Print volt" line="166" />
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated />
@@ -19,7 +18,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d86befd1-be22-498e-8a87-a4e025f4643f" name="Default Changelist" comment="" />
+    <list default="true" id="d86befd1-be22-498e-8a87-a4e025f4643f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,12 +29,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TR19DAQScript.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1531">
-              <caret line="59" selection-start-line="59" selection-end-line="59" />
+            <state relative-caret-position="2909">
+              <caret line="239" column="8" selection-start-line="239" selection-start-column="8" selection-end-line="239" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -50,7 +51,14 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>z4</find>
+      <find>print</find>
+      <find>oil</find>
+      <find>oPregear</find>
+      <find>OpRES</find>
     </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -66,6 +74,7 @@
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -130,22 +139,25 @@
       <updated>1556600081760</updated>
       <workItem from="1556600084634" duration="116000" />
       <workItem from="1556600205659" duration="253000" />
-      <workItem from="1556600487850" duration="3715000" />
+      <workItem from="1556600487850" duration="4252000" />
+      <workItem from="1556918666906" duration="4143000" />
+      <workItem from="1556928200774" duration="1412000" />
+      <workItem from="1558664322531" duration="598000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4084000" />
+    <option name="totallyTimeSpent" value="10774000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18390192" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19029851" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.13076098" />
+      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.12982832" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -155,7 +167,7 @@
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info anchor="bottom" id="CMake" order="11" weight="0.30653805" />
+      <window_info active="true" anchor="bottom" id="CMake" order="11" visible="true" weight="0.305794" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -178,8 +190,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TR19DAQScript.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1531">
-          <caret line="59" selection-start-line="59" selection-end-line="59" />
+        <state relative-caret-position="2909">
+          <caret line="239" column="8" selection-start-line="239" selection-start-column="8" selection-end-line="239" selection-end-column="8" />
         </state>
       </provider>
     </entry>
