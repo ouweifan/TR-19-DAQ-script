@@ -194,15 +194,28 @@ function onTick()
     writeCSer(6, 0xff)
     writeCSer(6, 0xff)
 
-    -- Print STANG
-    local stAng = getAnalog (4)
-    stAng = stAng*20
-    stAng = math.floor(stAng)
-    z0 = math.floor(stAng % 10)
-    stAng = stAng / 10
-    z1 = math.floor(stAng % 10)
-    stAng = stAng / 10
-    z2 = math.floor(stAng % 10)
+    -- Print STANG (should be changed to engine rpm
+    -- For nextion display:
+    --      Blue: 13 - 3000 - Idle
+    --      Gren:
+    --      Yelo: 80 - 8500 - Shifting point
+    --      RedL: 100 - 11500 - Redline
+    RPM = getTimerRpm (1)
+    RPM = math.floor(RPM)
+    local shiftVal = 0
+    if (RPM < 3000) then
+        shiftVal = RPM *13 / 3000
+    else if (RPM < 8500) then
+        shiftVal = (RPM-3000) * 67 / 5500 + 13
+    else
+        shiftVal = (RPM-8500) * 15 / 3000 + 80
+    end
+    shiftVal = math.floor(shiftVal)
+    z0 = math.floor(shiftVal % 10)
+    shiftVal = shiftVal / 10
+    z1 = math.floor(shiftVal % 10)
+    shiftVal = shiftVal / 10
+    z2 = math.floor(shiftVal % 10)
     writeCSer(6, 0x6a) --j
     writeCSer(6, 0x31) --1
     writeCSer(6, 0x2e) --.
