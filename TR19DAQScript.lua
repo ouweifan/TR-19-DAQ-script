@@ -205,7 +205,7 @@ function onTick()
     local shiftVal = 0
     if (RPM < 3000) then
         shiftVal = RPM *13 / 3000
-    else if (RPM < 8500) then
+    elseif (RPM < 8500) then
         shiftVal = (RPM-3000) * 67 / 5500 + 13
     else
         shiftVal = (RPM-8500) * 15 / 3000 + 80
@@ -235,7 +235,7 @@ function onTick()
     writeCSer(6, 0xff)
 
 
-
+    --[[
     -- Print gear
     local gear = calcGear(40.64, 2.75, 2.846, 1.947, 1.556, 1.333, 1.190, 1.083)
                             -- Wheel dia, final drive, 1st, 2nd.....
@@ -257,5 +257,6 @@ function onTick()
     writeCSer(6, 0xff)
     writeCSer(6, 0xff)
     writeCSer(6, 0xff)
+    ]]--
 
 end
