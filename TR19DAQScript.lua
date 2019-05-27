@@ -45,8 +45,41 @@ function onTick()
     local z2 = 0    -- 100
     local z3 = 0    -- 1000
     local z4 = 0    -- 10000
+    -- Print Lateral G -------------------------------------------------------------------------------------------------
+    local latG = getImu(1)
+    if latG < 0 then
+        neg = 1
+        latG = -latG
+    end
+    latG = latG * 100
+    latG = math.floor(latG)
+    x2 = math.floor(latG % 10)
+    latG = latG / 10
+    x1 = math.floor(latG % 10)
+    latG = latG / 10
+    z0 = math.floor(latG % 10)
+    latG = latG / 10
+    writeCSer(6, 0x74) --t
+    writeCSer(6, 0x30) --0
+    writeCSer(6, 0x2e) --.
+    writeCSer(6, 0x74) --t
+    writeCSer(6, 0x78) --x
+    writeCSer(6, 0x74) --t
+    writeCSer(6, 0x3d) --=
+    writeCSer(6, 0x22) --"
+    if (neg == 1) then
+        writeCSer(6, 0x2d) -- -
+    end
+    writeCSer(6, (48+z0))
+    writeCSer(6, 0x2e)
+    writeCSer(6, (48+x1))
+    writeCSer(6, (48+x2))
+    writeCSer(6, 0x22) --"
+    writeCSer(6, 0xff)
+    writeCSer(6, 0xff)
+    writeCSer(6, 0xff)
 
-    -- Print GPS spd
+    -- Print GPS spd----------------------------------------------------------------------------------------------------
     local spd = getGpsSpeed ()
     spd = math.floor(spd)
     z0 = math.floor(spd % 10)
@@ -59,7 +92,7 @@ function onTick()
     writeCSer(6, 0x78) --x
     writeCSer(6, 0x74) --t
     writeCSer(6, 0x3d) --=
-    writeCSer(6, 0x22) --
+    writeCSer(6, 0x22) --"
     if z1 ~= 0 then
         writeCSer(6, (48+z1))
     end
@@ -70,7 +103,7 @@ function onTick()
     writeCSer(6, 0xff)
 
 
-    -- Print engine RPM
+    -- Print engine RPM-------------------------------------------------------------------------------------------------
     local RPM = getTimerRpm (1)
     RPM = math.floor(RPM)
     z0 = math.floor(RPM % 10)
@@ -105,7 +138,7 @@ function onTick()
     writeCSer(6, 0xff)
     writeCSer(6, 0xff)
 
-    -- Print coolant Temp
+    -- Print coolant Temp-----------------------------------------------------------------------------------------------
     local cTemp = getAnalog (1)
     cTemp = math.floor(cTemp)
     z0 = math.floor(cTemp % 10)
@@ -133,38 +166,7 @@ function onTick()
     writeCSer(6, 0xff)
     writeCSer(6, 0xff)
 
-    -- Print oil pressure
-    local gear = getAnalog (2)
-    gear = math.floor(gear * 100)
-    x2 = math.floor(gear % 10)
-    gear = gear / 10
-    x1 = math.floor(gear % 10)
-    gear = gear / 10
-    z0 = math.floor(gear % 10)
-    gear = gear / 10
-    z1 = math.floor(gear % 10)
-    writeCSer(6, 0x74) --t
-    writeCSer(6, 0x36) --6
-    writeCSer(6, 0x2e) --.
-    writeCSer(6, 0x74) --t
-    writeCSer(6, 0x78) --x
-    writeCSer(6, 0x74) --t
-    writeCSer(6, 0x3d) --=
-    writeCSer(6, 0x22) --"
-    if (z1 ~= 0) then
-        writeCSer(6, (48+z1))
-    end
-    writeCSer(6, (48+z0))
-    writeCSer(6, 0x2e) --.
-    writeCSer(6, (48+x1))
-    writeCSer(6, (48+x2))
-    writeCSer(6, 0x22) --"
-    writeCSer(6, 0xff)
-    writeCSer(6, 0xff)
-    writeCSer(6, 0xff)
-
-
-    -- Print battery volt
+    -- Print battery volt-----------------------------------------------------------------------------------------------
     local volt = getAnalog (8)
     volt = math.floor(volt * 100)
     x2 = math.floor(volt % 10)
@@ -194,7 +196,69 @@ function onTick()
     writeCSer(6, 0xff)
     writeCSer(6, 0xff)
 
-    -- Print STANG (should be changed to engine rpm
+    -- Print TPS -------------------------------------------------------------------------------------------------
+    local TPS = getAnalog (0)
+    TPS = math.floor(TPS)
+    z0 = math.floor(TPS % 10)
+    TPS = TPS / 10
+    z1 = math.floor(TPS % 10)
+    TPS = TPS / 10
+    z2 = math.floor(TPS % 10)
+    writeCSer(6, 0x74) --t
+    writeCSer(6, 0x35) --5
+    writeCSer(6, 0x2e) --.
+    writeCSer(6, 0x74) --t
+    writeCSer(6, 0x78) --x
+    writeCSer(6, 0x74) --t
+    writeCSer(6, 0x3d) --=
+    writeCSer(6, 0x22) --"
+    if (neg == 1) then
+        writeCSer(6, 0x2d) -- -
+    end
+    if (z2 ~= 0) then
+        writeCSer(6, (48+z2))
+    end
+    if (z2 ~= 0 or z1~= 0) then
+        writeCSer(6, (48+z1))
+    end
+    writeCSer(6, (48+z0))
+    writeCSer(6, 0x22) --"
+    writeCSer(6, 0xff)
+    writeCSer(6, 0xff)
+    writeCSer(6, 0xff)
+
+    -- Print oil pressure-----------------------------------------------------------------------------------------------
+    local oilP = getAnalog (2)
+    oilP = math.floor(oilP * 100)
+    x2 = math.floor(oilP % 10)
+    oilP = oilP / 10
+    x1 = math.floor(oilP % 10)
+    oilP = oilP / 10
+    z0 = math.floor(oilP % 10)
+    oilP = oilP / 10
+    z1 = math.floor(oilP % 10)
+    writeCSer(6, 0x74) --t
+    writeCSer(6, 0x36) --6
+    writeCSer(6, 0x2e) --.
+    writeCSer(6, 0x74) --t
+    writeCSer(6, 0x78) --x
+    writeCSer(6, 0x74) --t
+    writeCSer(6, 0x3d) --=
+    writeCSer(6, 0x22) --"
+    if (z1 ~= 0) then
+        writeCSer(6, (48+z1))
+    end
+    writeCSer(6, (48+z0))
+    writeCSer(6, 0x2e) --.
+    writeCSer(6, (48+x1))
+    writeCSer(6, (48+x2))
+    writeCSer(6, 0x22) --"
+    writeCSer(6, 0xff)
+    writeCSer(6, 0xff)
+    writeCSer(6, 0xff)
+
+
+    -- Shift light (should be changed to engine rpm --------------------------------------------------------------------
     -- For nextion display:
     --      Blue: 13 - 3000 - Idle
     --      Gren:
