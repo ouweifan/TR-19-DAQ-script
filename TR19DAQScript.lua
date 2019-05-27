@@ -169,6 +169,7 @@ function onTick()
     -- Print battery volt-----------------------------------------------------------------------------------------------
     local volt = getAnalog (8)
     volt = math.floor(volt * 100)
+    volt = volt - 20
     x2 = math.floor(volt % 10)
     volt = volt / 10
     x1 = math.floor(volt % 10)
