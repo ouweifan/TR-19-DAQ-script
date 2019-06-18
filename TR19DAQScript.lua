@@ -229,7 +229,7 @@ function onTick()
     writeCSer(6, 0xff)
 
     -- Print oil pressure-----------------------------------------------------------------------------------------------
-    local oilP = getAnalog (2)
+    local oilP = getAnalog (5)
     oilP = math.floor(oilP * 100)
     x2 = math.floor(oilP % 10)
     oilP = oilP / 10
